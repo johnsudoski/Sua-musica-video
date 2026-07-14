@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Vídeo Homenagem — SuaMúsicaAI</title>
+  <meta name="description" content="Envie fotos, vídeos e conte a história de vocês. A IA monta um vídeo-homenagem real ao som da música criada especialmente para vocês." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <div class="logo">🎬 <span class="gradient-text">Vídeo Homenagem</span></div>
+  </div>
+</nav>
+
+<section class="hero" style="padding-top:110px;padding-bottom:40px;">
+  <div class="container hero-content">
+    <h1>Transforme fotos e vídeos reais<br><span class="gradient-text">num vídeo-homenagem com a música de vocês</span></h1>
+    <p class="hero-sub">Conte o que você quer criar, envie as fotos e vídeos, e a IA monta automaticamente um vídeo real — sincronizado com a música personalizada que você já está criando.</p>
+  </div>
+</section>
+
+<section class="form-section" id="criar">
+  <div class="container">
+    <div class="form-wrapper">
+      <div class="form-header">
+        <h2>Conte sua história e envie o material</h2>
+        <p>Depois de enviar, você segue para o pagamento — assim que confirmado, a música e o vídeo são criados automaticamente.</p>
+      </div>
+
+      <form id="videoForm">
+
+        <div class="form-group">
+          <label for="nomeDestinatario">Nome de quem vai receber 💝</label>
+          <input type="text" id="nomeDestinatario" name="nomeDestinatario" placeholder="Ex: Ana, Pedro, Mãe, Vó Maria..." required maxlength="50" />
+        </div>
+
+        <div class="form-group">
+          <label for="relacao">Qual a relação de vocês?</label>
+          <select id="relacao" name="relacao" required>
+            <option value="">Escolha...</option>
+            <option value="namorado">💑 Namorado(a)</option>
+            <option value="esposo">💍 Esposo(a) / Marido / Esposa</option>
+            <option value="mae">🌸 Mãe</option>
+            <option value="pai">👨 Pai</option>
+            <option value="filho">👶 Filho(a)</option>
+            <option value="amigo">🤝 Amigo(a) especial</option>
+            <option value="avo">👴 Avó / Avô</option>
+            <option value="irmao">👫 Irmão(ã)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="memoria">Uma memória especial de vocês ✨</label>
+          <textarea id="memoria" name="memoria" rows="4" placeholder="Ex: Quando ficamos horas conversando no telefone antes de nos conhecer..." required maxlength="500"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Estilo musical que ela mais gosta 🎸</label>
+          <div class="genre-grid">
+            <label class="genre-option"><input type="radio" name="genero" value="sertanejo" required /><span>🤠 Sertanejo</span></label>
+            <label class="genre-option"><input type="radio" name="genero" value="pop" /><span>🎤 Pop</span></label>
+            <label class="genre-option"><input type="radio" name="genero" value="mpb" /><span>🎸 MPB</span></label>
+            <label class="genre-option"><input type="radio" name="genero" value="romantico" /><span>💕 Romântico</span></label>
+            <label class="genre-option"><input type="radio" name="genero" value="pagode" /><span>🥁 Pagode</span></label>
+            <label class="genre-option"><input type="radio" name="genero" value="gospel" /><span>🙏 Gospel</span></label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Voz da música 🎙</label>
+          <div class="genre-grid" style="grid-template-columns: repeat(2, 1fr);">
+            <label class="genre-option"><input type="radio" name="voz" value="feminino" checked /><span>♀ Feminina</span></label>
+            <label class="genre-option"><input type="radio" name="voz" value="masculino" /><span>♂ Masculina</span></label>
+          </div>
+        </div>
+
+        <hr style="border:none;border-top:1px solid var(--border,#2a2a45);margin:28px 0;">
+
+        <div class="form-group">
+          <label for="brief">O que você quer criar no vídeo? 🎬</label>
+          <textarea id="brief" name="brief" rows="4" placeholder="Ex: Um vídeo com as fotos da nossa viagem e do dia do pedido de casamento, começando pelas fotos mais antigas até a mais recente..." required maxlength="600"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="files">Envie as fotos e vídeos (até 10 arquivos) 📸</label>
+          <input type="file" id="files" name="files" accept="image/*,video/*" multiple required />
+          <small style="color:var(--text-muted, #888);font-size:12px;margin-top:6px;display:block;">
+            Aceita fotos e vídeos. Até 150MB por arquivo.
+          </small>
+          <div id="fileList" style="margin-top:10px;font-size:13px;color:var(--text-muted,#888);"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="emailEntrega">Seu email 📧</label>
+          <input type="email" id="emailEntrega" name="emailEntrega" placeholder="seu@email.com" required />
+          <small style="color:var(--text-muted,#888);font-size:12px;margin-top:6px;display:block;">
+            Use o mesmo email que vai usar na compra. É por ele que reconhecemos seu pedido.
+          </small>
+        </div>
+
+        <button type="submit" id="submitBtn" class="btn-generate">Continuar para o pagamento →</button>
+
+        <div id="loadingSection" class="loading-section hidden">
+          <div class="spinner"></div>
+          <p>Enviando seu material...</p>
+        </div>
+
+        <div id="errorMsg" class="hidden" style="color:#f87171;text-align:center;margin-top:14px;"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <p class="footer-small">SuaMúsicaAI • Vídeo Homenagem</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
