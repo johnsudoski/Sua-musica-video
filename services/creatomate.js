@@ -57,7 +57,7 @@ function buildComposition({ audioUrl, nomeDestinatario, mediaFiles }) {
     x_anchor: '50%',
     y_anchor: '50%',
     width: '100%',
-    x_alignment: 'center',
+    x_alignment: 0.5,
   });
 
   return {
@@ -79,11 +79,17 @@ async function startVideoRender({ audioUrl, nomeDestinatario, mediaFiles }) {
 
   const composition = buildComposition({ audioUrl, nomeDestinatario, mediaFiles });
 
-  const res = await axios.post(
-    `${BASE}/renders`,
-    { source: JSON.stringify(composition) },
-    { headers: headers(), timeout: 20000 }
-  );
+  let res;
+  try {
+    res = await axios.post(
+      `${BASE}/renders`,
+      { source: composition },
+      { headers: headers(), timeout: 20000 }
+    );
+  } catch (err) {
+    console.error('[creatomate] Erro da API:', JSON.stringify(err.response?.data || err.message));
+    throw err;
+  }
 
   const render = Array.isArray(res.data) ? res.data[0] : res.data;
   const renderId = render?.id;
